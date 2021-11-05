@@ -1,4 +1,4 @@
-// router.js
+// Router.js
 
 /** Some hints for this router:
   *   - the functions being passed in should mostly be stored so that
@@ -80,7 +80,6 @@ export class Router {
       }
       if (statePopped != true && window.location.hash != hash) {
         console.log("match");
-        // const state = { 'page_id ': page }
         const state = page;
         console.log(window.location.origin + hash);
         history.pushState(state, '', window.location.origin + hash);
