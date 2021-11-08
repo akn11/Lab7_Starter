@@ -13,7 +13,6 @@
 
 export class Router {
   static routes = {};
-
   /**
    * Sets up the home function, the page name should always be 'home', which
    * is why no page name variable is passed in.
@@ -83,8 +82,10 @@ export class Router {
         const state = page;
         console.log(window.location.origin + hash);
         history.pushState(state, '', window.location.origin + hash);
+        // urlsToCache.push(window.location.origin + hash);
       }
       this[page]();
+      // return (window.location.origin + hash);
     }
     else {
       console.log("ERROR: Function does not exist");
