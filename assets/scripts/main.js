@@ -12,6 +12,8 @@ const recipes = [
 ];
 const recipeData = {} // You can access all of the Recipe Data from the JSON files in this variable
 
+
+
 const router = new Router(function () {
   /** 
    * TODO - Part 1 - Step 1
@@ -29,8 +31,6 @@ const router = new Router(function () {
   // console.log("hwllo");
   document.querySelector('section.section--recipe-cards').classList.add('shown');
   document.querySelector('section.section--recipe-expand').classList.remove('shown');
-  // document.querySelector('section.section--recipe-cards').classList.remove('shown');
-  // document.querySelector('section.section--recipe-expand').classList.add('shown');
 });
 
 window.addEventListener('DOMContentLoaded', init);
@@ -62,6 +62,18 @@ function initializeServiceWorker() {
    *  Initialize the service worker set up in sw.js
    */
   // ServiceWorker
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/sw.js').then(function (registration) {
+        // Registration was successful
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }, function (err) {
+        // registration failed :(
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
 }
 
 /**
@@ -121,6 +133,8 @@ function createRecipeCards() {
       document.querySelector('.section--recipe-cards').classList.remove('shown');
       document.querySelector('.section--recipe-expand').classList.add('shown');
       document.querySelector('recipe-expand').data = recipeData[recipes[i]];
+      // console.log("HERERREERE");
+      // console.log(window.location.origin + recipes[i]]['page-name']);
     });
 
     bindRecipeCard(recipeCard, page);
@@ -216,9 +230,7 @@ function bindEscKey() {
    */
   document.addEventListener('keydown', function (event) {
     if (event.key === "Escape") {
-      // router.navigate('home', true);
       router.navigate('home');
-      // router.navigate('ghostCookies', true);
 
     }
   });
